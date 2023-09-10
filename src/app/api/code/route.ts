@@ -1,7 +1,7 @@
-
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
+import { ChatCompletionMessageParam } from "openai/resources/chat/index.mjs";
 
 
 
@@ -11,7 +11,10 @@ const openai = new OpenAI({
 });
 
 
-
+const instructionMessage: ChatCompletionMessageParam = {
+    role: 'system',
+    content: 'You are a code generator. You must answer only in markdown code snippets. Use code comments for explanations.'
+}
 
 export async function POST (
     req: Request 
@@ -35,14 +38,14 @@ export async function POST (
 
         const response = await openai.chat.completions.create({
             model: "gpt-4",
-            messages
+            messages: [instructionMessage, ...messages]
           });
         
           return NextResponse.json(response.choices[0].message)
     }
     catch (error) {
     
-            console.log('[CONVERSATION_ERROR]', error);
+            console.log('[CODE_ERROR]', error);
             return new NextResponse("Internal Server Error", { status: 500 })
         }
     }
