@@ -1,25 +1,25 @@
 "use client";
 import Heading from "@/components/heading";
-import { MessageSquare } from "lucide-react";
-import { set, useForm } from "react-hook-form";
 import axios from "axios";
+import { Code } from "lucide-react";
+import { useForm } from "react-hook-form";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { formSchema } from "./constants";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { ChatCompletionMessageParam } from "openai/resources/chat/index.mjs";
+import BotAvatar from "@/components/bot-avatar";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import UserAvatar from "@/components/user-avatar";
-import BotAvatar from "@/components/bot-avatar";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { ChatCompletionMessageParam } from "openai/resources/chat/index.mjs";
+import { useState } from "react";
+import * as z from "zod";
+import { formSchema } from "./constants";
 
-export default function ConversationPage() {
+export default function CodePage() {
   const router = useRouter();
 
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
@@ -41,7 +41,7 @@ export default function ConversationPage() {
       };
       const newMessages = [...messages, userMessage];
 
-      const response = await axios.post("/api/conversation", {
+      const response = await axios.post("/api/code", {
         messages: newMessages,
       });
 
@@ -58,11 +58,11 @@ export default function ConversationPage() {
   return (
     <div>
       <Heading
-        title="Conversation"
-        description="Our most advanced conversation model"
-        icon={MessageSquare}
-        iconColor="text-violet-500"
-        bgColor="bg-violet-500/10"
+        title="Code Generation"
+        description="Generate code using descriptive text."
+        icon={Code}
+        iconColor="text-green-700"
+        bgColor="bg-green-700/10"
       />
       <div className="px-4 lg:px-8">
         <div>
@@ -79,7 +79,7 @@ export default function ConversationPage() {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="What are the first 100 digits of pi?"
+                        placeholder="Simple toggle button using react hooks"
                         {...field}
                       />
                     </FormControl>
