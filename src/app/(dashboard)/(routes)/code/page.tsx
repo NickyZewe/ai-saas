@@ -104,7 +104,7 @@ export default function CodePage() {
             </div>
           )}
           {messages.length === 0 && !isLoading && (
-            <Empty label="Start a conversation!" />
+            <Empty label="Let's code, bro (or sis)!" />
           )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
