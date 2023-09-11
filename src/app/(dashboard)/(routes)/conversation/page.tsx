@@ -1,26 +1,28 @@
 "use client";
 import Heading from "@/components/heading";
-import { MessageSquare } from "lucide-react";
-import { set, useForm } from "react-hook-form";
 import axios from "axios";
+import { MessageSquare } from "lucide-react";
+import { useForm } from "react-hook-form";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { formSchema } from "./constants";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { ChatCompletionMessageParam } from "openai/resources/chat/index.mjs";
+import BotAvatar from "@/components/bot-avatar";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import UserAvatar from "@/components/user-avatar";
-import BotAvatar from "@/components/bot-avatar";
+import { useProModal } from "@/hooks/use-pro-modal";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { ChatCompletionMessageParam } from "openai/resources/chat/index.mjs";
+import { useState } from "react";
+import * as z from "zod";
+import { formSchema } from "./constants";
 
 export default function ConversationPage() {
   const router = useRouter();
+  const proModal = useProModal();
 
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
 
@@ -48,7 +50,11 @@ export default function ConversationPage() {
       setMessages((current) => [...current, userMessage, response.data]);
       form.reset();
     } catch (error: any) {
-      // TODO: open pro modal
+      // open pro modal
+
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      }
       console.log(error);
     } finally {
       router.refresh();

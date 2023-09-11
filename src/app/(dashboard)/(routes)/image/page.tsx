@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";
+import { Card, CardFooter } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,16 +17,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useProModal } from "@/hooks/use-pro-modal";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as z from "zod";
 import { amountOptions, formSchema, resolutionOptions } from "./constants";
-import { Card, CardFooter } from "@/components/ui/card";
-import Image from "next/image";
 
 export default function ImagePage() {
   const router = useRouter();
+  const proModal = useProModal();
 
   const [images, setImages] = useState<string[]>([]);
 
@@ -52,8 +54,11 @@ export default function ImagePage() {
       setImages(urls);
       form.reset();
     } catch (error: any) {
-      // TODO: open pro modal
-      console.log(error);
+      // open pro modal
+
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }
