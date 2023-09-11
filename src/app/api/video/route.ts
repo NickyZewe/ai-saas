@@ -1,5 +1,6 @@
 
 import { checkApiLimit, increaseApiLimit } from "@/lib/api-limit";
+import { CheckSubscription } from "@/lib/subscription";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
@@ -32,7 +33,9 @@ export async function POST (
 
         const freeTrial = await checkApiLimit();
 
-        if (!freeTrial) {
+        const isPro = await CheckSubscription();
+
+        if (!freeTrial && !isPro) {
         return new NextResponse("Free trial limit reached", { status: 403 });
         }
 
@@ -45,7 +48,8 @@ export async function POST (
             }
           );
 
-          await increaseApiLimit();
+          if (!isPro){
+            await increaseApiLimit();}
 
           return NextResponse.json(response)
     }

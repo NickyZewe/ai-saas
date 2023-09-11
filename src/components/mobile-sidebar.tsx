@@ -8,10 +8,12 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
 interface MobileSidebarProps {
   apiLimitCount: number;
+  isPro: boolean;
 }
 
 export default function MobileSidebar({
   apiLimitCount = 0,
+  isPro = false,
 }: MobileSidebarProps) {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -31,7 +33,7 @@ export default function MobileSidebar({
         </Button>
       </SheetTrigger>
       <SheetContent side={"left"} className="p-0 text-white">
-        <Sidebar apiLimitCount={apiLimitCount} />
+        <Sidebar apiLimitCount={apiLimitCount} isPro={isPro} />
       </SheetContent>
     </Sheet>
   );
