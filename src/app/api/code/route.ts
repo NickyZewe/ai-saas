@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
 import { ChatCompletionMessageParam } from "openai/resources/chat/index.mjs";
+import toast from "react-hot-toast";
 
 
 
@@ -58,7 +59,7 @@ export async function POST (
     }
     catch (error) {
     
-            console.log('[CODE_ERROR]', error);
-            return new NextResponse("Internal Server Error", { status: 500 })
+        toast.error("Something went wrong");
+        return new NextResponse("Internal Server Error", { status: 500 })
         }
     }

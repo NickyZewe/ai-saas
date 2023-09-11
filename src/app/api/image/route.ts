@@ -4,6 +4,7 @@ import { CheckSubscription } from "@/lib/subscription";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
+import toast from "react-hot-toast";
 
 
 
@@ -63,7 +64,7 @@ export async function POST (
     }
     catch (error) {
     
-            console.log('[IMAGE_ERROR]', error);
-            return new NextResponse("Internal Server Error", { status: 500 })
+        toast.error("Something went wrong");
+        return new NextResponse("Internal Server Error", { status: 500 })
         }
     }

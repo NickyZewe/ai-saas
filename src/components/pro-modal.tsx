@@ -24,6 +24,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog";
+import toast from "react-hot-toast";
 
 const tools = [
   {
@@ -77,7 +78,7 @@ export const ProModal = () => {
 
       window.location.href = response.data.url;
     } catch (error) {
-      console.log("STRIPE_CLIENT_ERROR", error);
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -118,6 +119,7 @@ export const ProModal = () => {
             variant="upgrade"
             className="w-full"
             onClick={onSubscribe}
+            disabled={loading}
           >
             Upgrade
             <Zap className="w-4 h-4 ml-2 fill-white" />

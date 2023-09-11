@@ -24,6 +24,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as z from "zod";
 import { amountOptions, formSchema, resolutionOptions } from "./constants";
+import toast from "react-hot-toast";
 
 export default function ImagePage() {
   const router = useRouter();
@@ -58,6 +59,8 @@ export default function ImagePage() {
 
       if (error?.response?.status === 403) {
         proModal.onOpen();
+      } else {
+        toast.error("Something went wrong");
       }
     } finally {
       router.refresh();

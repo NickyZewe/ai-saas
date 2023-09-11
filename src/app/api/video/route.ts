@@ -3,6 +3,7 @@ import { checkApiLimit, increaseApiLimit } from "@/lib/api-limit";
 import { CheckSubscription } from "@/lib/subscription";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
+import toast from "react-hot-toast";
 
 
 
@@ -54,8 +55,7 @@ export async function POST (
           return NextResponse.json(response)
     }
     catch (error) {
-    
-            console.log('[VIDEO_ERROR]', error);
-            return new NextResponse("Internal Server Error", { status: 500 })
+       toast.error("Something went wrong");
+       return new NextResponse("Internal Server Error", { status: 500 })
         }
     }
