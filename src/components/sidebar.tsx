@@ -84,7 +84,7 @@ export default function Sidebar({
             <Image fill alt="logo" src="/logo1.png" />
           </div>
           <h1 className={cn("text-2xl font-bold", monserrat.className)}>
-            Brainwee
+            Nixi AI
           </h1>
         </Link>
         <div className="space-y-1">

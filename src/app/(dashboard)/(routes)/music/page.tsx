@@ -98,7 +98,9 @@ export default function MusicPage() {
               <Loader />
             </div>
           )}
-          {!music && !isLoading && <Empty label="Let's make a hit!" />}
+          {!music && !isLoading && (
+            <Empty label="Ask DJ Nixi to drop a beat!" />
+          )}
           {music && (
             <audio controls className="w-full mt-8">
               <source src={music} />
