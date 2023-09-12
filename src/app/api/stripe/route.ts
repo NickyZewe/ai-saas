@@ -3,7 +3,7 @@ import { stripe } from '@/lib/stripe';
 import { absoluteUrl } from '@/lib/utils';
 import { auth, currentUser } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
-import toast from 'react-hot-toast';
+
 
 
 const settingsUrl = absoluteUrl('/settings');
@@ -68,7 +68,7 @@ export async function GET() {
 
         return new NextResponse(JSON.stringify({ url: stripeSession.url }));
     } catch (error) {
-        toast.error("Something went wrong");
+        console.log("Something went wrong", error);
         return new NextResponse('Internal Error', { status: 500 });
     }
 }
