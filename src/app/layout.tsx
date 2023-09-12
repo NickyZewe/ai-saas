@@ -10,7 +10,7 @@ import { CrispProvider } from "@/components/crisp-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Brainwee AI",
+  title: "Nixi AI",
   description: "AI Platform",
 };
 
@@ -21,6 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/logo1.png" />
+      </head>
       <ClerkProvider>
         <CrispProvider />
         <body className={inter.className}>
