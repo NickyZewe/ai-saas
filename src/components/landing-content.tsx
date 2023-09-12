@@ -6,8 +6,8 @@ const testimonials = [
   {
     name: "Antonio",
     avatar: "A",
-    title: "Loner",
-    description: "Nixi AI is my best friend",
+    title: "Designer",
+    description: "I use this daily for generating new photos!",
   },
   {
     name: "Alexa",
@@ -19,13 +19,13 @@ const testimonials = [
     name: "Niko",
     avatar: "N",
     title: "Best dog in the world",
-    description: "Nixi AI is my best friend",
+    description: "Nixi AI is my best friend!",
   },
   {
-    name: "Niko",
-    avatar: "N",
-    title: "Best dog in the world",
-    description: "Nixi AI is my best friend",
+    name: "Loki",
+    avatar: "L",
+    title: "Cat",
+    description: "Meow.",
   },
 ];
 
