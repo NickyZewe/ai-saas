@@ -15,7 +15,7 @@ export default async function SettingsPage() {
         iconColor="text-gray-700"
         bgColor="bg-gray-700/10"
       />
-      <div className="pc-4 lg:px-8 space-y-4">
+      <div className="px-4 lg:px-8 space-y-4">
         <div className="text-muted-foreground text-sm">
           {isPro ? "You are a Pro user." : "You are currently on a free plan."}
         </div>
